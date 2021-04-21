@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/purple_66229F"
-        tools:context=".HomeActivity">
+        tools:context=".ui.home.HomeActivity">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/current_day_tv"
@@ -43,6 +43,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
 
+            android:transitionName="logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/splash_circule"
@@ -57,7 +58,6 @@
             android:layout_marginHorizontal="16dp"
             android:fontFamily="@font/almarai_regular"
             android:gravity="center"
-            android:text="اللهم اجعل صيامي فيه صيام الصادقين، وقيامي فيه قيام القانتين، ونبهني فيه عن نومة الغافلين، واغفر لي جرمي فيه يا إله العالمين، واعف عني يا عافيا عن المجرمين."
             android:textColor="@color/white"
             android:textSize="19sp"
             app:layout_constraintTop_toBottomOf="@id/ramadan_desing_guidline" />
@@ -98,7 +98,7 @@
             app:minChunkHeight="10dp"
             app:progress="60"
             app:touchable="true"
-            app:waveColor="@android:color/white" />
+            app:waveColor="@color/yellow_f3d345" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/end_tv"
