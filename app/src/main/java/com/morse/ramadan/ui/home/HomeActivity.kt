@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.morse.ramadan.R
 import com.morse.ramadan.databinding.ActivityHomeBinding
+import com.morse.ramadan.externsion.floatValueAnimation
 import com.morse.ramadan.externsion.getRamadanDaysArrayList
 import com.morse.ramadan.externsion.setUpWaveShape
 import com.morse.ramadan.externsion.translateYwithScaleAnimation
@@ -60,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun setupViewModel() {
-        homeViewModel.day?.observe(this){
+        homeViewModel.day?.observe(this) {
             ramadanDayPosition = it
             changeDayUi(ramadanDayPosition)
         }
@@ -85,9 +86,9 @@ class HomeActivity : AppCompatActivity() {
 
     fun changeDayUi(position: Int) {
         val day = listOfRamadanDays.get(position - 1)
-        binding?.endTv?.setText(day.dayAudioLength)
+        binding?.endTv?.floatValueAnimation(day.dayAudioLength.toFloat())
         binding?.wave?.setRawData(setUpWaveShape(day.dayAudio))
-        binding?.prayerQuoteTv?.setText(day.dayPrayer)
+        binding?.prayerQuoteTv?.setText(getString(R.string.quote_lable, day.dayPrayer))
         binding?.currentDayTv?.setText(getString(R.string.current_day, day.dayNumberAr))
     }
 

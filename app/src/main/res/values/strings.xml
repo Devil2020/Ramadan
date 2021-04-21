@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Ramadan</string>
     <string name="current_day"> %1$s من رمضان</string>
+    <string name="quote_lable">“ %1$s “</string>
 </resources>
