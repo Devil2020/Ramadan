@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "740769832299",
+    "project_id": "ramadan-be694",
+    "storage_bucket": "ramadan-be694.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740769832299:android:373e760e1b6245a67ec02e",
+        "android_client_info": {
+          "package_name": "com.morse.ramadan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740769832299-dfs9t73ig658db6ida0e8mnvq0rch26a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.morse.ramadan",
+            "certificate_hash": "efd753e3a342b480362bc54f0fda3267f1e93147"
+          }
+        },
+        {
+          "client_id": "740769832299-7q68juo4r2c4ci9vnmj4i64c64ecscnn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcTmUTW5aVa2hGe85ZpJLIHdUC5lbsTds"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740769832299-7q68juo4r2c4ci9vnmj4i64c64ecscnn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
