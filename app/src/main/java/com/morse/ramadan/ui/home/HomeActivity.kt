@@ -1,10 +1,12 @@
 package com.morse.ramadan.ui.home
 
 import android.animation.Animator
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.morse.ramadan.R
+import com.morse.ramadan.core.MediaManager
 import com.morse.ramadan.databinding.ActivityHomeBinding
 import com.morse.ramadan.externsion.floatValueAnimation
 import com.morse.ramadan.externsion.getRamadanDaysArrayList
@@ -15,6 +17,7 @@ import rm.com.audiowave.OnProgressListener
 
 class HomeActivity : AppCompatActivity() {
 
+    var mediaManager = MediaManager(this)
     var binding: ActivityHomeBinding? = null
     var listener = object : Animator.AnimatorListener {
 
@@ -68,6 +71,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun setupWave() {
+        mediaManager.getMediaPlayerObject().
         binding?.wave?.onProgressListener = object : OnProgressListener {
             override fun onProgressChanged(progress: Float, byUser: Boolean) {
                 // invokes every time the progress's been changed
@@ -90,6 +94,9 @@ class HomeActivity : AppCompatActivity() {
         binding?.wave?.setRawData(setUpWaveShape(day.dayAudio))
         binding?.prayerQuoteTv?.setText(getString(R.string.quote_lable, day.dayPrayer))
         binding?.currentDayTv?.setText(getString(R.string.current_day, day.dayNumberAr))
+        val file = assets.openFd(day.dayAudio)
+        mediaManager.start( file.fileDescriptor)
+
     }
 
     override fun onDestroy() {

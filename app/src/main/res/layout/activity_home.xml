@@ -98,7 +98,7 @@
             app:chunkWidth="3dp"
             app:layout_constraintBottom_toTopOf="@id/start_tv"
             app:minChunkHeight="10dp"
-            app:progress="60"
+            app:progress="0"
             app:touchable="true"
             app:waveColor="@color/yellow_f3d345" />
 
