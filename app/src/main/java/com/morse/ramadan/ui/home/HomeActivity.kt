@@ -13,6 +13,9 @@ import com.morse.ramadan.externsion.getRamadanDaysArrayList
 import com.morse.ramadan.externsion.setUpWaveShape
 import com.morse.ramadan.externsion.translateYwithScaleAnimation
 import com.morse.ramadan.ui.selectday.SelectDayBottomSheetDialog
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.receiveAsFlow
 import rm.com.audiowave.OnProgressListener
 
 class HomeActivity : AppCompatActivity() {
@@ -61,6 +64,51 @@ class HomeActivity : AppCompatActivity() {
         setupViewModel()
         setupWave()
         changeDayUi(ramadanDayPosition)
+        setupListeners()
+    }
+
+    fun setupListeners() {
+        binding?.playBt?.setOnClickListener {
+            if (mediaManager.isPlaying()) {
+                mediaManager.pause()
+                binding?.playBt?.setImageResource(R.drawable.ic_baseline_play_arrow_24)
+                mediaManager?.removeUpdateValueListener()
+            } else {
+                mediaManager.play()
+                binding?.playBt?.setImageResource(R.drawable.ic_group_96)
+                mediaManager?.listenToUpdateValueListener().receiveAsFlow().onEach {
+                    binding?.wave?.progress =
+                        mediaManager.getMediaPlayerObject().currentPosition.toFloat()
+                    binding?.startTv?.text =
+                        mediaManager.getMediaPlayerObject().currentPosition.toString()
+                }
+            }
+        }
+        binding?.nextBt?.setOnClickListener {
+            if(ramadanDayPosition < 30) {
+                ramadanDayPosition = ramadanDayPosition + 1
+                val day = listOfRamadanDays.get(ramadanDayPosition)
+                binding?.endTv?.floatValueAnimation(day.dayAudioLength.toFloat())
+                binding?.wave?.setRawData(setUpWaveShape(day.dayAudio))
+                binding?.prayerQuoteTv?.setText(getString(R.string.quote_lable, day.dayPrayer))
+                binding?.currentDayTv?.setText(getString(R.string.current_day, day.dayNumberAr))
+                val file = assets.openFd(day.dayAudio)
+                mediaManager.setFile(file.fileDescriptor)
+            }
+        }
+        binding?.previousBt?.setOnClickListener {
+            if (ramadanDayPosition >= 1) {
+                ramadanDayPosition = ramadanDayPosition - 1
+                val day = listOfRamadanDays.get(ramadanDayPosition)
+                binding?.endTv?.floatValueAnimation(day.dayAudioLength.toFloat())
+                binding?.wave?.setRawData(setUpWaveShape(day.dayAudio))
+                binding?.prayerQuoteTv?.setText(getString(R.string.quote_lable, day.dayPrayer))
+                binding?.currentDayTv?.setText(getString(R.string.current_day, day.dayNumberAr))
+                val file = assets.openFd(day.dayAudio)
+                mediaManager.setFile(file.fileDescriptor)
+            }
+        }
+        binding?.wave?.progress = mediaManager.getMediaPlayerObject().currentPosition.toFloat()
     }
 
     fun setupViewModel() {
@@ -71,7 +119,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     fun setupWave() {
-        mediaManager.getMediaPlayerObject().
+        //mediaManager.getMediaPlayerObject().
         binding?.wave?.onProgressListener = object : OnProgressListener {
             override fun onProgressChanged(progress: Float, byUser: Boolean) {
                 // invokes every time the progress's been changed
@@ -95,7 +143,7 @@ class HomeActivity : AppCompatActivity() {
         binding?.prayerQuoteTv?.setText(getString(R.string.quote_lable, day.dayPrayer))
         binding?.currentDayTv?.setText(getString(R.string.current_day, day.dayNumberAr))
         val file = assets.openFd(day.dayAudio)
-        mediaManager.start( file.fileDescriptor)
+        mediaManager.setFile(file.fileDescriptor)
 
     }
 

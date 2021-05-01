@@ -6,6 +6,9 @@ import android.animation.ValueAnimator
 import android.view.View
 import android.view.animation.BounceInterpolator
 import android.widget.TextView
+import kotlinx.coroutines.*
+import java.util.logging.Logger
+import kotlin.system.measureTimeMillis
 
 fun View.scaleUpAnimation(animationListner: Animator.AnimatorListener) {
     this?.animate()?.alpha(1f)?.scaleX(1f)?.scaleY(1f)
@@ -43,3 +46,4 @@ fun TextView.intValueAnimation(toValue: Int) {
     valueAnimation.setDuration(2000)
     valueAnimation.start()
 }
+

@@ -133,7 +133,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:clickable="true"
-            android:src="@drawable/ic_group_96"
+            android:src="@drawable/ic_baseline_play_arrow_24"
             app:layout_constraintBottom_toTopOf="@id/wave"
             app:layout_constraintEnd_toEndOf="@id/wave"
             app:layout_constraintStart_toStartOf="@id/wave" />
